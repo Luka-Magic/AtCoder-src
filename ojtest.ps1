@@ -1,0 +1,1 @@
+function ojtest ([string]$x) { oj t -c "python $x/main.py" -d $x/tests/ }
