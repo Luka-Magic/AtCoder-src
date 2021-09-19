@@ -1,21 +1,7 @@
-import sys
+s = {}
+s[1] = input()
+s[2] = input()
+s[3] = input()
 
-
-def main():
-    s1 = input()
-    s2 = input()
-    s3 = input()
-    t = list(map(int, list(input())))
-    ans = ''
-    for i in t:
-        if i == 1:
-            ans += s1
-        elif i == 2:
-            ans += s2
-        else:
-            ans += s3
-    print(ans)
-
-
-if __name__ == '__main__':
-    main()
+t = input()
+print(''.join([s[int(i)] for i in t]))
