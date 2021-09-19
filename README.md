@@ -1,3 +1,3 @@
 # AtCoder-src
 
-Atcoderのソースコード
+Atcoder記録
