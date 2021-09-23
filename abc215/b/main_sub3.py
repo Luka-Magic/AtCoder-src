@@ -1,5 +1,6 @@
 n = int(input())
+
 ans = 0
-while (1 << ans) <= n:
+while 2**(ans + 1) <= n:
     ans += 1
-print(ans-1)
+print(ans)

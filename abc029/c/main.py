@@ -1,15 +1,15 @@
-from itertools import product
-import sys
-input = sys.stdin.readline
+n = int(input())
+ans = []
 
 
-def main():
-    n = int(input())
-    li = ['a', 'b', 'c']
+def f(s, i):
+    if i >= n:
+        ans.append(s)
+        return None
+    else:
+        return f(s+'a', i+1), f(s+'b', i+1), f(s+'c', i+1)
 
-    for i in product(li, repeat=n):
-        print(''.join(list(i)))
+f('', 0)
 
-
-if __name__ == '__main__':
-    main()
+ans.sort()
+print(*ans, sep='\n')
