@@ -28,13 +28,14 @@ for i in li:
     for s in arr:
         no.add(s)
 
-hante = [1] * (m+1)
+hante = [0] + [1] * (m)
 for s in no:
     if s == 1:
         continue
     for i in range(0, m+1, s):
         hante[i] = 0
+
 print(sum(hante))
 for a in range(1, m+1):
-    if hante[a] == 1:
+    if hante[a]:
         print(a)
