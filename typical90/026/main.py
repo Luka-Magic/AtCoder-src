@@ -17,7 +17,7 @@ def main():
         que = deque([i])
         seen[i] = -1
         while que:
-            key = que.pop()
+            key = que.popleft()
             for i in g[key]:
                 if seen[i]:
                     continue

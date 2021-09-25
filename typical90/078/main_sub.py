@@ -1,3 +1,6 @@
+import bisect
+
+
 def main():
     n, m = map(int, input().split())
     g = [[] for _ in range(n)]
@@ -7,11 +10,8 @@ def main():
         g[b-1].append(a-1)
     ans = 0
     for i, l in enumerate(g):
-        k = 0
-        for j in l:
-            if i > j:
-                k += 1
-        if k == 1:
+        l.sort()
+        if bisect.bisect_left(l, i) == 1:
             ans += 1
     print(ans)
 

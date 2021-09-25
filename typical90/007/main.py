@@ -1,21 +1,14 @@
-def main():
-    n = int(input())
-    li = list(map(int, input().split()))
-    q = int(input())
-    B = [int(input()) for _ in range(q)]
+from bisect import bisect_left
+n = int(input())
+li = list(map(int, input().split()))
 
-    li.sort()
+q = int(input())
 
-    import bisect
-    for b in B:
-        le = bisect.bisect_left(li, b)
-        if le == 0:
-            print(abs(li[le] - b))
-        elif le == n:
-            print(abs(li[le-1] - b))
-        else:
-            print(min(abs(li[le-1]-b), abs(li[le]-b)))
+li.append(float('inf'))
+li.append(-float('inf'))
+li.sort()
 
-
-if __name__ == '__main__':
-    main()
+for _ in range(q):
+    b = int(input())
+    i = bisect_left(li, b)
+    print(min(b-li[i-1], li[i]-b))

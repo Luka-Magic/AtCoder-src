@@ -1,5 +1,5 @@
 from collections import Counter
-from itertools import accumulate
+import itertools
 
 
 def main():
@@ -7,19 +7,16 @@ def main():
     li = [[0] * 1001 for _ in range(1001)]
     for _ in range(n):
         lx, ly, rx, ry = map(int, input().split())
-        li[ly][lx] += 1
-        li[ry][rx] += 1
-        li[ly][rx] -= 1
-        li[ry][lx] -= 1
-
-    ans_l = []
+        for i in range(ly, ry):
+            li[i][lx] += 1
+            li[i][rx] -= 1
     ans = []
-    for l in li:
-        ans_l.append(list(accumulate(l)))
-    ans_l = [list(i) for i in zip(*ans_l)]
-    for l in ans_l:
-        ans.extend(accumulate(l))
 
+    for l in li:
+        k = [l[0]]
+        for i in l[1:]:
+            k.append(k[-1] + i)
+        ans.extend(k)
     c = Counter(ans)
     for i in range(1, n+1):
         print(c[i])
