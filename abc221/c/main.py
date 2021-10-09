@@ -1,25 +1,21 @@
-from itertools import permutations
-import math
+n = input()
+l = len(n)
 
-mod = 10**9 + 7
-inf = float('inf')
-
-
-def main():
-    n = list(input())
-    l = len(n) // 2 + 1
-    ans = 0
-    for i in permutations(n, len(n)):
-        for j in range(1, l):
-            s = i[:j]
-            t = i[j:]
-            if s[0] == '0' or t[0] == '0':
-                continue
-            s = int(''.join(s))
-            t = int(''.join(t))
-            ans = max(s * t, ans)
-    print(ans)
+ans = 0
 
 
-if __name__ == '__main__':
-    main()
+def f(s, t, k):
+    global ans
+    if k == l:
+        if s == '' or t == '':
+            return
+        s = sorted(s, reverse=True)
+        t = sorted(t, reverse=True)
+        ans = max(ans, int(''.join(s)) * int(''.join(t)))
+        return
+    else:
+        return f(s + n[k], t, k+1), f(s, t + n[k], k+1)
+
+
+f('', '', 0)
+print(ans)
