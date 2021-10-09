@@ -1,14 +1,19 @@
 import sys
+from itertools import accumulate
+
 input = sys.stdin.readline
 
 mod = 10**9 + 7
 inf = float('inf')
 
 
-def main():
-    n = int(input())
-    
+n = int(input())
+li = [list(map(int, input().split())) for _ in range(n)]
 
+l = [0] * (10 ** 6 + 10)
 
-if __name__ == '__main__':
-    main()
+for a, b in li:
+    l[a] += 1
+    l[b+1] -= 1
+
+print(max(list(accumulate(l))))
