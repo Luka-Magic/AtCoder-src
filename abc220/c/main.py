@@ -7,14 +7,17 @@ inf = float('inf')
 
 def main():
     n = int(input())
-    li = list(map(int, input().split()))
+    a = list(map(int, input().split()))
     x = int(input())
-    s = sum(li)
-    ans = n * (x // s)
-    t = s * (x // s)
-    while t <= x:
-        t += li[ans % n]
+    su = sum(a)
+    t = x // su
+    ans = n * t
+    no = x % su
+    for k in a:
         ans += 1
+        no -= k
+        if no < 0:
+            break
     print(ans)
 
 
