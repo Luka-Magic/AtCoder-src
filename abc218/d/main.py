@@ -1,27 +1,24 @@
 import sys
 input = sys.stdin.readline
 
+from itertools import combinations
 
 def main():
     n = int(input())
-    li = [list(map(int, input().split())) for _ in range(n)]
-    dic = {}
-    for l in li:
-        x, y = l
-        if x not in dic:
-            dic[x] = {y}
-        else:
-            dic[x].add(y)
-    x_l = dic.keys()
-    from itertools import combinations
+    s = set()
     ans = 0
-    for x1, x2 in combinations(x_l, 2):
-        k = dic[x1]
-        t = dic[x2]
-        s = k & t
-        s_n = len(s)
-        ans += (s_n * (s_n-1)) // 2
-    print(ans)
+    for _ in range(n):
+        x, y = map(int, input().split())
+        s.add((x, y))
+    li = list(s)
+    for i, j in combinations(list(range(n)), 2):
+        x1, y1 = li[i]
+        x2, y2 = li[j]
+        if (x1 == x2) or (y1 == y2):
+            continue
+        if ((x1, y2) in s) and ((x2, y1) in s):
+            ans += 1
+    print(ans // 2)
 
 if __name__ == '__main__':
     main()
