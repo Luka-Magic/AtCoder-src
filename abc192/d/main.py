@@ -1,37 +1,31 @@
-import sys
-input = sys.stdin.readline
+def n2ten(num_n, n, m):
+    num_10 = 0
+    for s in str(num_n):
+        num_10 *= n
+        num_10 += int(s)
+        if num_10 > m:
+            return True
+    return num_10
 
-mod = 10**9 + 7
-inf = float('inf')
+x = input()
+m = int(input())
 
+init = max(list(map(int, list(x))))+1
+low = init - 1
+high = 10**18 + 1
 
-def f(x, base):
-    x = list(map(int, list(str(x))))
-    num = 0
-    for i in x:
-        num = num * base + i
-    return num
+if len(x) == 1 and int(x) <= m:
+    print(1)
+    exit()
 
+def f(mid):
+    return n2ten(x, mid, m)
 
-def main():
-    X = int(input())
-    m = int(input())
-    t = max(list(map(int, list(str(X)))))
-    if X < 10:
-        print(+(X <= m))
-        exit()
-
-    low, high = t, m+1
-
-    while high - low > 1:
-        mid = (high + low) // 2
-        x = f(X, mid)
-        if x > m:
-            high = mid
-        else:
-            low = mid
-    print(low - t)
-
-
-if __name__ == '__main__':
-    main() 
+while low+1 < high:
+    mid = (low + high) //2
+    guess = f(mid)
+    if guess > m or guess == True:
+        high = mid
+    else:
+        low = mid
+print(low - init + 1)

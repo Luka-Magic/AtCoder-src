@@ -1,11 +1,7 @@
-from functools import reduce
 import math
-import sys
-input = sys.stdin.readline
-
-mod = 10**9 + 7
-inf = float('inf')
-
+from functools import reduce
+def gcd(*numbers):
+    return reduce(math.gcd, numbers)
 
 def prime_factorization(N):  # 素因数分解
     exponent = 0
@@ -31,19 +27,5 @@ def prime_factorization(N):  # 素因数分解
     assert N != 0, 'zero'
     return factorization
 
-def main():
-    a, b = map(int, input().split())
-    a_s = set([])
-    b_s = set([])
-    A = prime_factorization(a)
-    B = prime_factorization(b)
-    for i, _ in A:
-        a_s.add(i)
-    for i, _ in B:
-        b_s.add(i)
-    ans = a_s & b_s
-
-    print(len(ans) + 1)
-
-if __name__ == '__main__':
-    main()
+a, b = map(int, input().split())
+print(len(prime_factorization(gcd(a, b)))+1)

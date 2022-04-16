@@ -1,32 +1,20 @@
-import sys
-input = sys.stdin.readline
+n = int(input())
+li = list(map(lambda x:bin(int(x))[2:].zfill(61), input().split()))
+
+ans = 0
 
 mod = 10**9 + 7
-inf = float('inf')
 
+for i in range(61):
+    n0 = 0
+    n1 = 0
+    for l in li:
+        if l[61 - i - 1] == '1':
+            n1 += 1
+        else:
+            n0 += 1
+    ans += (((n0 * n1) % mod) * (pow(2, i, mod))) % mod
+    ans %= mod
 
-def ten2n(num_10, n):
-    str_n = ''
-    while num_10:
-        if num_10 % n >= 10:
-            return -1
-        str_n += str(num_10 % n)
-        num_10 //= n
-    return (str_n[::-1]).zfill(61)
+print(ans)
 
-def main():
-    n = int(input())
-    li = list(map(lambda x: ten2n(int(x), 2), input().split()))
-    ans = 0
-    for k in range(61):
-        k_d = 0
-        for i in li:
-            if i[-k-1] == '1':
-                k_d += 1
-        ans += k_d * (n-k_d) * (2 ** k)
-        ans %= mod
-    print(ans)
-
-
-if __name__ == '__main__':
-    main()
