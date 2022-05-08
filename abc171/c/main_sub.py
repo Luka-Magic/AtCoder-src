@@ -1,22 +1,23 @@
-import sys
-input = sys.stdin.readline
-
 mod = 10**9 + 7
 inf = float('inf')
 
 def ten2n(num_10,n):
-    li = []
+    num_10 -= 1
+    str_n = []
     while num_10:
-        li.append(num_10%n if num_10%n != 0 else 26)
+        if len(str_n) == 0:
+            str_n.append(num_10%n)
+        else:
+            str_n.append(num_10%n - 1)
         num_10 //= n
-    return li
+    return str_n[::-1]
 
 def main():
     n = int(input())
-    ans = ''
-    for i in ten2n(n, 26)[::-1]:
-        ans += chr(i+ord('a')-1)
-    print(ans)
+    if n == 1:
+        print('a')
+    else:
+        print(''.join([chr(i + ord('a')) for i in ten2n(n, 26)]))
 
 if __name__ == '__main__':
     main()

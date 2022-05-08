@@ -1,12 +1,15 @@
-import sys
-input = sys.stdin.readline
+n = int(input())
+li = list(map(int, input().split()))
 
-mod = 10**9 + 7
-inf = float('inf')
+su = sum(li)
+from collections import Counter
+counter = Counter(li)
 
+q = int(input())
 
-def main():
-
-
-if __name__ == '__main__':
-    main()
+for _ in range(q):
+    b, c = map(int, input().split())
+    su += (- b + c) * counter[b]
+    counter[c] += counter[b]
+    counter[b] = 0
+    print(su)

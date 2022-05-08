@@ -1,23 +1,27 @@
 mod = 10**9 + 7
 inf = float('inf')
 
-def ten2n(num_10,n):
-    num_10 -= 1
-    str_n = []
+def ten2n(num_10, n, i):
+    str_n = ''
+    c = 0
     while num_10:
-        if len(str_n) == 0:
-            str_n.append(num_10%n)
-        else:
-            str_n.append(num_10%n - 1)
+        str_n += chr(num_10 % n + ord('a'))
         num_10 //= n
-    return str_n[::-1]
+        c += 1
+    return 'a' * (i - c) + str_n[::-1]
 
 def main():
     n = int(input())
-    if n == 1:
-        print('a')
-    else:
-        print(''.join([chr(i + ord('a')) for i in ten2n(n, 26)]))
+    ans = ''
+    i = 0
+    k = n - 1
+    while 1:
+        if 0 <= k < 26 ** (i + 1):
+            print(ten2n(k, 26, i+1))
+            break
+        else:
+            k -= 26 ** (i + 1)
+            i += 1
 
 if __name__ == '__main__':
     main()
