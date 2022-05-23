@@ -6,12 +6,9 @@ inf = float('inf')
 
 
 def main():
-    n, k = map(int, input().split())
-    
+    n = int(input())
+    print(chr(n))
+
 
 if __name__ == '__main__':
     main()
-
-acc new abc252
-cd abc252
-

@@ -4,7 +4,6 @@ input = sys.stdin.readline
 mod = 10**9 + 7
 inf = float('inf')
 
-
 def main():
     n, q = map(int, input().split())
     li = list(range(1, n+1))
