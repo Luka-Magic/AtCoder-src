@@ -1,50 +1,34 @@
-from collections import deque
 import sys
-input = sys.stdin.readline
+sys.setrecursionlimit(10 ** 6)
 
-mod = 10**9 + 7
-inf = float('inf')
+n, q = map(int, input().split())
 
+li = [list(map(lambda x:int(x) - 1, input().split())) for _ in range(n-1)]
+q_li = [list(map(int, input().split())) for _ in range(q)]
 
-def main():
-    n, q = map(int, input().split())
-    li = [list(map(int, input().split())) for _ in range(n-1)]
-    query = [list(map(int, input().split())) for _ in range(q)]
+rin = [[] for _ in range(n)]
 
-    ki = [[] for _ in range(n)]
-    for a, b in li:
-        ki[a-1].append(b-1)
-        ki[b-1].append(a-1)
+for a, b in li:
+    rin[a].append(b)
+    rin[b].append(a)
 
-    dic = {}
-    for p in query:
-        if p[0]-1 not in dic:
-            dic[p[0]-1] = p[1]
-        else:
-            dic[p[0]-1] += p[1]
+q_li.sort(key=lambda x: x[0])
 
-    def bfs():
-        ans = [0] * n
-        seen = [0] * n
-        que = deque([0])
-        if 0 in dic:
-            ans[0] = dic[0]
-        while que:
-            i = que.popleft()
-            seen[i] = 1
-            for j in ki[i]:
-                if seen[j] != 0:
-                    continue
-                if j in dic:
-                    ans[j] = ans[i] + dic[j]
-                else:
-                    ans[j] = ans[i]
-                que.append(j)
-        return ans
-    
-    ans = bfs()
-    print(*ans)
+q = [0] * n
+for i, v in q_li:
+    i -= 1
+    q[i] += v
 
+seen = [-1] * n
 
-if __name__ == '__main__':
-    main()
+def dfs(i, x):
+    # i番目のカウンターを検索
+    x += q[i]
+    seen[i] = x
+    for k in rin[i]:
+        if seen[k] == -1:
+            dfs(k, x)
+
+dfs(0, 0)
+
+print(*seen)
